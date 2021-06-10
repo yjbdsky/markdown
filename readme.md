@@ -1,0 +1,1 @@
+格式化剪贴板中字符串为markdown的表格格式,如:以tab分隔的table(从execl表格复制)
