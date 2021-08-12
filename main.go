@@ -39,6 +39,8 @@ func getSecondLine(i int) []string {
 
 func getKeywords(s string) ([]int32, [][]string) {
 	var ret [][]string
+	s = strings.Replace(s, "\n\r", "\n", -1)
+	s = strings.Replace(s, "\r\n", "\n", -1)
 	lines := strings.Split(s, "\n")
 	if len(lines) <= 1 {
 		return nil, nil
@@ -50,8 +52,10 @@ func getKeywords(s string) ([]int32, [][]string) {
 	}
 
 	for i, line := range lines {
+		line = strings.Replace(line, "\n", "", -1)
 		ks := make([]string, cloum)
 		keys := strings.Split(line, "\t")
+
 		copy(ks, keys)
 
 		ret = append(ret, ks)
@@ -60,12 +64,11 @@ func getKeywords(s string) ([]int32, [][]string) {
 			row = row + 1
 		}
 	}
-	fmt.Println(ret)
-	fmt.Println(cloum, row, len(ret))
+
+	fmt.Println("cloum, row, len: ", cloum, row, len(ret))
 	maxCloumLen := make([]int32, cloum)
 	for j := 0; j < cloum; j++ {
 		for i := 0; i < row; i++ {
-			fmt.Println(i, j)
 			keyLen := int32(len(ret[i][j]))
 			maxCloumLen[j] = Max(maxCloumLen[j], keyLen)
 		}
@@ -75,7 +78,7 @@ func getKeywords(s string) ([]int32, [][]string) {
 		for i := 0; i < row; i++ {
 			keyLen := int32(len(ret[i][j]))
 			maxLen := maxCloumLen[j]
-			fmt.Println(maxLen, keyLen)
+			//fmt.Println(maxLen, keyLen)
 			if keyLen < maxLen {
 				for x := int32(0); x < maxLen-keyLen; x++ {
 					ret[i][j] = ret[i][j] + " "
@@ -83,6 +86,7 @@ func getKeywords(s string) ([]int32, [][]string) {
 			}
 		}
 	}
+	//fmt.Println("ret:",ret)
 	return maxCloumLen, ret
 }
 
