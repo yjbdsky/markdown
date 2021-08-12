@@ -1,1 +1,5 @@
 格式化剪贴板中字符串为markdown的表格格式,如:以tab分隔的table(从execl表格复制)
+
+执行一下命令，自动把第一行变为表头，自动替换剪贴板中的excel格式为markdown格式
+
+linux可以设置系统快捷键，windows可以配合快捷键工具使用或手点执行
